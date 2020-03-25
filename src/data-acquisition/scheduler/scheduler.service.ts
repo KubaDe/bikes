@@ -1,18 +1,15 @@
-import { Observable } from 'rxjs';
-import {AxiosResponse} from 'axios'
 import { Injectable, HttpService } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { CollectorService } from '../collector/collector.service'
 
 @Injectable()
-export class CollectorService {
-  constructor(private httpService: HttpService) {}
+export class SchedulerService {
+  constructor(private collectorService: CollectorService) {
+    collectorService.setupCityInfrastructure()
+  }
 
   @Cron(CronExpression.EVERY_10_SECONDS)
   handleCron() {
-
-  }
-
-  findAll(): Observable<AxiosResponse<any>> {
-    return this.httpService.get(process.env.BIKE_SERVICE_URL);
+    // this.collectorService.scrap()
   }
 }

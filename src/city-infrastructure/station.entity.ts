@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import * as yup from 'yup';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+
+import { CityInfrastructure } from './city-infrastructure.entity';
 
 @Entity()
-export class CityInfrastructure {
+export class Station {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,21 +20,23 @@ export class CityInfrastructure {
   lng: string;
 
   @Column()
-  zoom: string;
+  spot: string;
 
-  @Column({type: 'json'})
-  bounds: string;
+  @Column()
+  number: number;
 
+  @Column()
+  placeType: string;
+
+  @Column({ type: 'json' })
+  bikeTypes: string;
+
+  @Column()
+  bikeRacks: number;
+
+  @ManyToOne(
+    type => CityInfrastructure,
+    cityInfrastructure => cityInfrastructure.stations,
+  )
+  cityInfrastructure: CityInfrastructure;
 }
-
-
-
-//   num_places: yup.string().required(),
-//   refresh_rate: yup.string().required(),
-//   bounds: yup.string().required(),
-//   booked_bikes: yup.string().required(),
-//   set_point_bikes: yup.string().required(),
-//   available_bikes: yup.string().required(),
-//   return_to_official_only: yup.string().required(),
-//   bike_types: yup.string().required(),
-//   website: yup.string().required(),
