@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Station {
+  id: Int!
+  uuid: String!
+  name: String!
+  lat: String!
+  lng: String!
+  spot: String!
+  number: Float!
+  placeType: String!
+  bikeTypes: String!
+  bikeRacks: Float!
+}
+
+type CityInfrastructure {
+  id: Int!
+  uuid: String!
+  name: String!
+  lat: String!
+  lng: String!
+  zoom: String!
+  bounds: String!
+  stations: [Station!]!
+}
+
+type Bike {
+  id: Int!
+  number: Int!
+  type: Int!
+}
+
+type Query {
+  cityInfrastructure: CityInfrastructure!
+  bikes(cityInfrastructureId: Int!): [Bike!]!
+}

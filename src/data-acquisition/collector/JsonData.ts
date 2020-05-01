@@ -20,7 +20,7 @@ export const jsonSchema = yup.object().shape({
           set_point_bikes: yup.string().required(),
           available_bikes: yup.string().required(),
           return_to_official_only: yup.string().required(),
-          bike_types: yup.string().required(),
+          bike_types: yup.string(),
           website: yup.string().required(),
         }).required(),
         place: yup.array().of(yup.object().shape({

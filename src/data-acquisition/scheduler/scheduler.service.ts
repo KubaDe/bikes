@@ -10,6 +10,6 @@ export class SchedulerService {
 
   @Cron(CronExpression.EVERY_10_SECONDS)
   handleCron() {
-    // this.collectorService.scrap()
+    this.collectorService.scrapAndSnap()
   }
 }

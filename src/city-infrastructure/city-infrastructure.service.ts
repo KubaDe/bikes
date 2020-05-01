@@ -22,7 +22,11 @@ export class CityInfrastructureService {
   ) {}
 
   public get(): Promise<CityInfrastructure> {
-    return this.cityInfrastructureRepository.findOne();
+    return this.cityInfrastructureRepository.findOne({relations: ['stations']});
+  }
+
+  public getBikes(cityInfrastructureId: number): Promise<Bikes> {
+    return this.bikeRepository.find({cityInfrastructure: {id: cityInfrastructureId}});
   }
 
   public async clear(): Promise<void> {

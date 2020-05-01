@@ -2,6 +2,7 @@ import { Connection } from 'typeorm';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -21,6 +22,12 @@ import { SnapshotModule } from './snapshot/snapshot.module';
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
       autoLoadEntities: true,
+    }),
+    GraphQLModule.forRoot({
+      debug: true,
+      playground: true,
+      installSubscriptionHandlers: true,
+      autoSchemaFile: 'schema.gql',
     }),
     DataAcquisitionModule,
     CityInfrastructureModule,

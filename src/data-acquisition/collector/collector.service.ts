@@ -16,7 +16,7 @@ export class CollectorService {
 
   public scrap(): Observable<JsonData> {
     return this.httpService.get(process.env.BIKE_SERVICE_URL).pipe(
-      map(response => response.data),
+      map(response => { return response.data; }),
       map(rawData => this.parseRawData(rawData)),
       map(jsonData => {
         if (isJsonData(jsonData)) {
@@ -65,7 +65,7 @@ export class CollectorService {
           );
           const bikesUniq = _.uniqBy(
             bikesRepeatable,
-            bike => bike._attributes.number,
+            bike => bike?._attributes.number,
           );
           const bikes = bikesUniq
             .filter(bike => bike)
@@ -92,5 +92,9 @@ export class CollectorService {
       .subscribe({
         error: err => console.error(err),
       });
+  }
+
+  public async scrapAndSnap(): Promise<void> {
+
   }
 }
